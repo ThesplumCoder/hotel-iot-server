@@ -1,12 +1,11 @@
 package com.github.thesplum.hoteliotserver.controllers;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +27,11 @@ public class RfidCardController {
 
   @GetMapping()
   public List<RfidCard> getAll() {
-    return rcr.findAll();
+    LinkedList<RfidCard> res = new LinkedList<>();
+    for (RfidCard card : rcr.findAll()) {
+      res.add(card);
+    }
+    return res;
   }
 
   @PostMapping()
@@ -36,4 +39,8 @@ public class RfidCardController {
     return rcr.save(rfidCard);
   }
 
+  @DeleteMapping()
+  public void deleteById(@RequestBody RfidCard card) {
+    rcr.deleteById(card.getId());
+  }
 }

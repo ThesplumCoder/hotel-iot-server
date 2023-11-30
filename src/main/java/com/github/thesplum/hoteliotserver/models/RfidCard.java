@@ -25,6 +25,10 @@ public class RfidCard {
    */
   private String uid;
 
+  public RfidCard() {
+
+  }
+
   public RfidCard(String uid) {
     setUid(uid);
   }
@@ -34,7 +38,6 @@ public class RfidCard {
    *
    * @return Número correspondiente al id.
    */
-  @Column(name = "id", nullable = false)
   public Integer getId() {
     return id;
   }
@@ -44,16 +47,24 @@ public class RfidCard {
    *
    * @return El valor de UID unido por comas en una cadena de texto.
    */
-  @Column(name = "uid", nullable = false)
   public String getUid() {
     return uid;
   }
 
   /**
+   * Fija el valor del identificador de la tarjeta.
+   *
+   * @param id Número que identifica cada tarjeta RFID disponible en el sistema.
+   */
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  /**
    * Fija el valor del identificador físico.
    *
-   * @param Valores decimales del UID que trae la tarjeta, juntos y separados por
-   *                comas.
+   * @param uid Valores decimales del UID que trae la tarjeta, juntos y separados
+   *            por comas.
    */
   public void setUid(String uid) {
     this.uid = uid;

@@ -1,6 +1,6 @@
 package com.github.thesplum.hoteliotserver.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.github.thesplum.hoteliotserver.models.RfidCard;
@@ -13,6 +13,6 @@ import com.github.thesplum.hoteliotserver.models.RfidCard;
  * @version 1.0
  */
 @Repository
-public interface RfidCardRepository extends JpaRepository<RfidCard, Integer> {
+public interface RfidCardRepository extends CrudRepository<RfidCard, Integer> {
 
 }
