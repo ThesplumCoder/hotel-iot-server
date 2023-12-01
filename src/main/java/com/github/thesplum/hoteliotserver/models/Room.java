@@ -1,9 +1,12 @@
 package com.github.thesplum.hoteliotserver.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -19,6 +22,9 @@ public class Room {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer number;
   private boolean occupied;
+  
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "rfid_card_id", referencedColumnName = "id")
   private RfidCard rfidCard;
 
   public Room() {
