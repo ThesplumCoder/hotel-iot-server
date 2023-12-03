@@ -1,12 +1,10 @@
 package com.github.thesplum.hoteliotserver.models;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -18,46 +16,85 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "rooms")
 public class Room {
+
+  /**
+   * Identificador para BD.
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer number;
+  private Integer id;
+
+  /**
+   * Número de la habitación.
+   *
+   * Este campo es de tipo texto para facilitar la numeración de habitaciones que
+   * se basa en la combinación de: número del piso, número del edificio, división,
+   * etc.
+   */
+  @Column(columnDefinition = "VARCHAR(5)")
+  private String number;
+
+  /**
+   * Indica si la habitación ha sido asignada a un huesped.
+   *
+   * Si el valor es true entonces la habitación ya fue asignada, en caso contrario
+   * es false.
+   * 
+   * @see Guest
+   */
   private boolean occupied;
-  
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "rfid_card_id", referencedColumnName = "id")
-  private RfidCard rfidCard;
 
   public Room() {
     //
   }
 
-  public Room(Integer number, boolean occupied, RfidCard rfidCard) {
+  /**
+   * Inicializa una habitación con número y estado de ocupación.
+   *
+   * @param number   Número de la habitación.
+   * @param occupied Si la habitación ya fue asignada a un cliente.
+   */
+  public Room(String number, boolean occupied) {
     setNumber(number);
     setOccupied(occupied);
-    setRfidCard(rfidCard);
   }
 
-  public Integer getNumber() {
+  /**
+   * Retorna el identificador.
+   */
+  public Integer getId() {
+    return id;
+  }
+
+  /**
+   * Retorna el número de habitación.
+   */
+  public String getNumber() {
     return number;
   }
 
+  /**
+   * Retorna el estado de asignación de la habitación.
+   */
   public boolean getOccupied() {
     return occupied;
   }
 
-  public RfidCard getRfidCard() {
-    return rfidCard;
-  }
-
-  public void setNumber(Integer number) {
+  /**
+   * Cambia el número asignado a la habitación.
+   *
+   * @param number Nuevo número de habitación.
+   */
+  public void setNumber(String number) {
     this.number = number;
   }
 
+  /**
+   * Cambia el estado de ocupación de la habitación.
+   *
+   * @param occupied Actualización del estado de ocupación.
+   */
   public void setOccupied(boolean occupied) {
     this.occupied = occupied;
-  }
-
-  public void setRfidCard(RfidCard rfidCard) {
-    this.rfidCard = rfidCard;
   }
 }
