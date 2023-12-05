@@ -10,37 +10,38 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.thesplum.hoteliotserver.models.Status;
+import com.github.thesplum.hoteliotserver.repositories.StatusRepository;
+
 import jakarta.validation.Valid;
 
-import com.github.thesplum.hoteliotserver.models.Guest;
-import com.github.thesplum.hoteliotserver.repositories.GuestRepository;
-
 /**
- * RoomController
+ * StatusController
  */
 @RestController
-@RequestMapping("/guest")
-public class GuestController {
+@RequestMapping("/status")
+public class StatusController {
 
   @Autowired
-  private GuestRepository guestRepo;
+  private StatusRepository statusRepo;
 
   @GetMapping()
-  public List<Guest> getAll() {
-    LinkedList<Guest> res = new LinkedList<>();
-    for (Guest guest : guestRepo.findAll()) {
-      res.add(guest);
+  public List<Status> getAll() {
+    LinkedList<Status> res = new LinkedList<>();
+    for (Status status : statusRepo.findAll()) {
+      res.add(status);
     }
     return res;
   }
 
   @PostMapping()
-  public Guest createGuest(@Valid @RequestBody Guest guest) {
-    return guestRepo.save(guest);
+  public Status create(@Valid @RequestBody Status status) {
+    return statusRepo.save(status);
   }
 
   @DeleteMapping()
-  public void deleteById(@RequestBody Guest guest) {
-    guestRepo.deleteById(guest.getId());
+  public void deleteById(@RequestBody Status status) {
+    statusRepo.deleteById(status.getId());
   }
 }

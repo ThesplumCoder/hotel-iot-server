@@ -23,12 +23,12 @@ import com.github.thesplum.hoteliotserver.repositories.RfidCardRepository;
 public class RfidCardController {
 
   @Autowired
-  private RfidCardRepository rcr;
+  private RfidCardRepository rcRepo;
 
   @GetMapping()
   public List<RfidCard> getAll() {
     LinkedList<RfidCard> res = new LinkedList<>();
-    for (RfidCard card : rcr.findAll()) {
+    for (RfidCard card : rcRepo.findAll()) {
       res.add(card);
     }
     return res;
@@ -36,11 +36,11 @@ public class RfidCardController {
 
   @PostMapping()
   public RfidCard createRfidCard(@Valid @RequestBody RfidCard rfidCard) {
-    return rcr.save(rfidCard);
+    return rcRepo.save(rfidCard);
   }
 
   @DeleteMapping()
   public void deleteById(@RequestBody RfidCard card) {
-    rcr.deleteById(card.getId());
+    rcRepo.deleteById(card.getId());
   }
 }

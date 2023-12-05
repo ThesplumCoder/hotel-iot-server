@@ -8,5 +8,5 @@ import com.github.thesplum.hoteliotserver.models.Guest;
  * GuestRepository
  */
 public interface GuestRepository extends CrudRepository<Guest, Integer> {
-
+  //
 }
