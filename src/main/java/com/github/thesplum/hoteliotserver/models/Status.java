@@ -8,7 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
- * Status
+ * Status modela los estados posibles en los que puede estar una tarjeta RFID en
+ * el sistema.
+ *
+ * @author Anderson Acuña (ThesplumCoder).
+ * @version 1.0
  */
 @Entity
 @Table(name = "status")
@@ -24,7 +28,7 @@ public class Status {
   /**
    * Nombre del estado o una descripción de él.
    */
-  @Column(columnDefinition = "VARCHAR(10)")
+  @Column(name = "description", length = 50)
   private String description;
 
   /**
@@ -37,9 +41,11 @@ public class Status {
   /**
    * Inicializa un estado con su descripción.
    *
+   * @param id          Identificador para la BD.
    * @param description Nombre o descripción del estado.
    */
-  public Status(String description) {
+  public Status(Integer id, String description) {
+    setId(id);
     setDescription(description);
   }
 
@@ -55,6 +61,15 @@ public class Status {
    */
   public String getDescription() {
     return description;
+  }
+
+  /**
+   * Cambia el identificador para BD de la habitación.
+   *
+   * @param id Nuevo identificador para BD.
+   */
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**

@@ -31,7 +31,7 @@ public class Room {
    * se basa en la combinación de: número del piso, número del edificio, división,
    * etc.
    */
-  @Column(columnDefinition = "VARCHAR(5)")
+  @Column(name = "number", length = 5)
   private String number;
 
   /**
@@ -54,7 +54,8 @@ public class Room {
    * @param number   Número de la habitación.
    * @param occupied Si la habitación ya fue asignada a un cliente.
    */
-  public Room(String number, boolean occupied) {
+  public Room(Integer id, String number, boolean occupied) {
+    setId(id);
     setNumber(number);
     setOccupied(occupied);
   }
@@ -78,6 +79,15 @@ public class Room {
    */
   public boolean getOccupied() {
     return occupied;
+  }
+
+  /**
+   * Cambia el identificador para BD de la habitación.
+   *
+   * @param id Nuevo identificador para BD.
+   */
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**

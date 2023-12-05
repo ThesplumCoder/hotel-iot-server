@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -16,20 +19,49 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "rfid_cards")
 public class RfidCard {
+  /**
+   * Identificador para la BD.
+   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
   /**
-   * Identificador único que tiene viene con la tarjeta.
+   * La habitación a la que fue asociada la tarjeta.
    */
+  @ManyToOne
+  @JoinColumn(name = "room_id")
+  private Room room;
+
+  /**
+   * Estado de la tarjeta en el sistema.
+   */
+  @OneToOne
+  @JoinColumn(name = "status_id")
+  private Status status;
+
+  /**
+   * Identificador único que viene con la tarjeta.
+   */
+  @Column(name = "uid", length = 50)
   private String uid;
 
   public RfidCard() {
-
+    //
   }
 
-  public RfidCard(String uid) {
+  /**
+   * Inicializa una tarjeta RFID con todos los parámetros especificados.
+   *
+   * @param id     Identificador para la BD.
+   * @param room   Habitación asociada.
+   * @param status Estado de la tarjeta.
+   * @param uid    Identificador físico de la tarjeta.
+   */
+  public RfidCard(Integer id, Room room, Status status, String uid) {
+    setId(id);
+    setRoom(room);
+    setStatus(status);
     setUid(uid);
   }
 
@@ -40,6 +72,24 @@ public class RfidCard {
    */
   public Integer getId() {
     return id;
+  }
+
+  /**
+   * Retorna la habitación a la que está asociada.
+   *
+   * @return Habitación asociada.
+   */
+  public Room getRoom() {
+    return room;
+  }
+
+  /**
+   * Retorna el estado de la tarjeta.
+   *
+   * @return Estado actual de la tarjeta.
+   */
+  public Status getStatus() {
+    return status;
   }
 
   /**
@@ -58,6 +108,24 @@ public class RfidCard {
    */
   public void setId(Integer id) {
     this.id = id;
+  }
+
+  /**
+   * Cambia la habitación asociada a la tarjeta.
+   *
+   * @param room Nueva habitación a asociar.
+   */
+  public void setRoom(Room room) {
+    this.room = room;
+  }
+
+  /**
+   * Cambia el estado de la tarjeta.
+   *
+   * @param status Nuevo estado de la tarjeta.
+   */
+  public void setStatus(Status status) {
+    this.status = status;
   }
 
   /**

@@ -41,6 +41,6 @@ public class RoomController {
 
   @DeleteMapping()
   public void deleteByNumber(@RequestBody Room room) {
-    roomRepo.deleteById(room.getNumber());
+    roomRepo.deleteById(room.getId());
   }
 }
